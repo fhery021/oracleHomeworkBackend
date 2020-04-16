@@ -1,14 +1,13 @@
 package com.example.homeworkbackend.customer;
 
+import com.example.homeworkbackend.services.CustomerServiceEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,13 +15,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CustomerEntity {
-
-//    •   Customer name
-//•       Customer Legal address city name
-//•       Customer phone number
-//•       Customer e-mail address
-//•       Customer net income
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,5 +29,8 @@ public class CustomerEntity {
     private String emailAddress;
 
     private Long netIncome;
+
+    @OneToMany
+    private List<CustomerServiceEntity> services;
 
 }
