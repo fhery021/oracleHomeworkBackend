@@ -1,7 +1,10 @@
 package com.example.homeworkbackend.bootstrap;
 
+import com.example.homeworkbackend.customer.CustomerDTO;
 import com.example.homeworkbackend.customer.CustomerEntity;
+import com.example.homeworkbackend.customer.CustomerMapper;
 import com.example.homeworkbackend.customer.CustomerRepository;
+import com.example.homeworkbackend.generator.customer.RandomCustomerData;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -10,8 +13,15 @@ public class Bootstrap implements CommandLineRunner {
 
     private final CustomerRepository customerRepository;
 
-    public Bootstrap(CustomerRepository customerRepository) {
+    private final RandomCustomerData randomCustomerData;
+    private final CustomerMapper customerMapper;
+
+    public Bootstrap(CustomerRepository customerRepository,
+                     RandomCustomerData randomCustomerData,
+                     CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
+        this.randomCustomerData = randomCustomerData;
+        this.customerMapper = customerMapper;
     }
 
     @Override
@@ -20,14 +30,12 @@ public class Bootstrap implements CommandLineRunner {
     }
 
     private void loadCustomers() {
-        CustomerEntity customerEntity = CustomerEntity.builder()
-                .id(1L)
-                .name("John")
-                .cityName("New York")
-                .phoneNumber("+36 12 345 6789")
-                .emailAddress("johnn@gmail.com")
-                .netIncome(1000L)
-                .build();
-        customerRepository.save(customerEntity);
+        for (int i=1; i<51; i++) {
+            CustomerDTO dto = randomCustomerData.generateCustomerData();
+            CustomerEntity entity = customerMapper.dtoToEntity(dto);
+            entity.setId((long) i);
+            customerRepository.save(entity);
+        }
+
     }
 }
