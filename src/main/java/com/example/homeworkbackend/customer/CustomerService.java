@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface CustomerService {
 
-    List<CustomerResponse> findAll();
+    List<CustomerDTO> findAll();
 
-    CustomerResponse findById(Long customerId);
+
 
 }

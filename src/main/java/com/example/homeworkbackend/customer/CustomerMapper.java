@@ -1,17 +1,31 @@
 package com.example.homeworkbackend.customer;
 
-import com.example.homeworkbackend.common.RequestResponseMapper;
+import com.example.homeworkbackend.common.DTOMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CustomerMapper implements RequestResponseMapper<CustomerEntity, CustomerRequest, CustomerResponse> {
+public class CustomerMapper implements DTOMapper<CustomerEntity, CustomerDTO> {
 
     @Override
-    public CustomerResponse entityToResponse(CustomerEntity entity) {
+    public CustomerEntity dtoToEntity(CustomerDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+        return CustomerEntity.builder()
+                .name(dto.getName())
+                .cityName(dto.getCityName())
+                .phoneNumber(dto.getPhoneNumber())
+                .emailAddress(dto.getEmailAddress())
+                .netIncome(dto.getNetIncome())
+                .build();
+    }
+
+    @Override
+    public CustomerDTO entityToDTO(CustomerEntity entity) {
         if (entity == null) {
             return null;
         }
-        return CustomerResponse.builder()
+        return CustomerDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .cityName(entity.getCityName())
@@ -20,19 +34,4 @@ public class CustomerMapper implements RequestResponseMapper<CustomerEntity, Cus
                 .netIncome(entity.getNetIncome())
                 .build();
     }
-
-    @Override
-    public CustomerEntity requestToEntity(CustomerRequest request) {
-        if (request == null) {
-            return null;
-        }
-        return CustomerEntity.builder()
-                .name(request.getName())
-                .cityName(request.getCityName())
-                .phoneNumber(request.getPhoneNumber())
-                .emailAddress(request.getEmailAddress())
-                .netIncome(request.getNetIncome())
-                .build();
-    }
-
 }

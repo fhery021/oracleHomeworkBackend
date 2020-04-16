@@ -1,6 +1,6 @@
 package com.example.homeworkbackend.customer;
 
-import com.example.homeworkbackend.services.CustomerServiceEntity;
+import com.example.homeworkbackend.services.ServicesEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +31,6 @@ public class CustomerEntity {
     private Long netIncome;
 
     @OneToMany
-    private List<CustomerServiceEntity> services;
+    private List<ServicesEntity> services;
 
 }

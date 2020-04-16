@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerServiceEntity {
+public class ServicesEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
