@@ -1,4 +1,4 @@
-package com.example.homeworkbackend.generator.services;
+package com.example.homeworkbackend.random;
 
 import com.example.homeworkbackend.services.ServicesDTO;
 import com.example.homeworkbackend.services.ServicesType;

@@ -1,4 +1,4 @@
-package com.example.homeworkbackend.generator.customer;
+package com.example.homeworkbackend.random;
 
 import com.example.homeworkbackend.customer.CustomerDTO;
 import org.springframework.stereotype.Component;
@@ -33,7 +33,7 @@ public class RandomCustomerData {
 
 
     private int randomIndexForNames() {
-        return ThreadLocalRandom.current().nextInt(0, NAMES.size() - 1);
+        return ThreadLocalRandom.current().nextInt(0, NAMES.size());
     }
 
     private String randomName() {

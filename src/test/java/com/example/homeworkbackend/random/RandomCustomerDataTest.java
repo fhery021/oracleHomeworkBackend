@@ -1,4 +1,4 @@
-package com.example.homeworkbackend.generator.customer;
+package com.example.homeworkbackend.random;
 
 import com.example.homeworkbackend.customer.CustomerDTO;
 import org.junit.jupiter.api.BeforeEach;

@@ -17,6 +17,18 @@ public class ServicesController {
         this.servicesService = servicesService;
     }
 
+    @PostMapping
+    public ResponseEntity createService(
+            @RequestParam Long customerId,
+            @RequestBody ServicesDTO servicesDTO
+    ) {
+        ServicesDTO created = servicesService.createService(customerId, servicesDTO);
+        if (created == null) {
+            return badRequest().body("Customer with id + " + customerId + " not found");
+        }
+        return ResponseEntity.ok(created);
+    }
+
     @GetMapping("/customer")
     public ResponseEntity<List<ServicesDTO>> getServiceByCustomerId(
             @RequestParam(name = "customerId") Long customerId) {
@@ -28,15 +40,5 @@ public class ServicesController {
         return ResponseEntity.ok(servicesService.findAll());
     }
 
-    @PostMapping
-    public ResponseEntity applyCustomer(
-            @RequestParam Long customerId,
-            @RequestParam Long serviceId
-    ) {
-        ServicesDTO dto = servicesService.applyCustomer(customerId, serviceId);
-        if (dto == null){
-            return badRequest().body("Customer or service id not found");
-        }
-        return ResponseEntity.ok(dto);
-    }
+
 }

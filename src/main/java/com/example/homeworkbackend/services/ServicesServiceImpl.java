@@ -29,38 +29,35 @@ public class ServicesServiceImpl implements ServicesService {
     }
 
     @Override
-    public List<ServicesDTO> getServicesByCustomerId(Long customerId) {
-        // TODO replace with findByCustomerID in repository...
-        List<ServicesDTO> servicesDTOS = servicesRepository.findAll()
-                .stream()
-                .filter(servicesEntity -> servicesEntity.getCustomer() != null && servicesEntity.getCustomer().getId().equals(customerId))
-                .map(servicesMapper::entityToDTO)
-                .collect(Collectors.toList());
+    public ServicesDTO createService(Long customerId, ServicesDTO servicesDTO) {
+        if (!customerRepository.existsById(customerId)) {
+            log.error("Customer with id: " + customerId + " not found.");
+            return null;
+        } else {
+            CustomerEntity customerEntity = customerRepository.findById(customerId).get();
+            ServicesEntity servicesEntity = servicesMapper.dtoToEntity(servicesDTO);
+            servicesEntity.setCustomer(customerEntity);
+            ServicesEntity saved = servicesRepository.save(servicesEntity);
+            return servicesMapper.entityToDTO(saved);
+        }
 
-        return servicesDTOS;
     }
 
     @Override
-    public ServicesDTO applyCustomer(Long customerId, Long serviceId) {
-
-        Optional<CustomerEntity> customerEntityOpt = customerRepository.findById(customerId);
-        if (!customerEntityOpt.isPresent()) {
+    public List<ServicesDTO> getServicesByCustomerId(Long customerId) {
+        // TODO replace with findByCustomerID in repository...
+        if (!customerRepository.existsById(customerId)) {
             log.error("Customer with id: " + customerId + " not found.");
             return null;
+        } else {
+            List<ServicesDTO> servicesDTOS = servicesRepository.findAll()
+                    .stream()
+                    .filter(servicesEntity -> servicesEntity.getCustomer() != null && servicesEntity.getCustomer().getId().equals(customerId))
+                    .map(servicesMapper::entityToDTO)
+                    .collect(Collectors.toList());
+
+            return servicesDTOS;
         }
-
-        Optional<ServicesEntity> servicesEntityOpt = servicesRepository.findById(serviceId);
-        if(!servicesEntityOpt.isPresent()){
-            log.error("Service with id: " + serviceId + "not found.");
-            return null;
-        }
-
-        ServicesEntity entity = servicesEntityOpt.get();
-        entity.setCustomer(customerEntityOpt.get());
-        ServicesEntity saved = servicesRepository.save(entity);
-
-        return servicesMapper.entityToDTO(saved);
-
     }
 
     @Override

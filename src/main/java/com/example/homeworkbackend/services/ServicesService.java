@@ -6,7 +6,7 @@ public interface ServicesService {
 
     List<ServicesDTO> getServicesByCustomerId(Long customerId);
 
-    ServicesDTO applyCustomer(Long customerId, Long serviceId);
+    ServicesDTO createService(Long customerId, ServicesDTO servicesDTO);
 
     List<ServicesDTO> findAll();
 }

@@ -21,8 +21,10 @@ class CustomerControllerTest {
 
     @Test
     void findAllCustomers() throws Exception {
-        mockMvc.perform(get("/customer/").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/v1/customer/").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("[1]").isNotEmpty());
     }
+
+
 }
