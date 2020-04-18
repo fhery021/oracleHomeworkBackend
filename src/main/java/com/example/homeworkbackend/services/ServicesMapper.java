@@ -1,16 +1,44 @@
 package com.example.homeworkbackend.services;
 
 import com.example.homeworkbackend.common.DTOMapper;
+import com.example.homeworkbackend.customer.CustomerMapper;
+import org.springframework.stereotype.Component;
 
-public class ServicesMapper implements DTOMapper<ServicesEntity, ServicesRequest> {
+@Component
+public class ServicesMapper implements DTOMapper<ServicesEntity, ServicesDTO> {
 
-    @Override
-    public ServicesEntity dtoToEntity(ServicesRequest dto) {
-        return null;
+    private final CustomerMapper customerMapper;
+
+    public ServicesMapper(CustomerMapper customerMapper) {
+        this.customerMapper = customerMapper;
     }
 
     @Override
-    public ServicesRequest entityToDTO(ServicesEntity entity) {
-        return null;
+    public ServicesEntity dtoToEntity(ServicesDTO dto) {
+        if (dto == null){
+            return null;
+        }
+        return ServicesEntity.builder()
+                .type(dto.getType())
+                .startDate(dto.getStartDate())
+                .endDate(dto.getEndDate())
+                .description(dto.getDescription())
+//                .customer(customerMapper.dtoToEntity(dto.getCustomerDTO()))
+                .build();
+    }
+
+    @Override
+    public ServicesDTO entityToDTO(ServicesEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+        return ServicesDTO.builder()
+                .id(entity.getId())
+                .type(entity.getType())
+                .startDate(entity.getStartDate())
+                .endDate(entity.getEndDate())
+                .description(entity.getDescription())
+//                .customerDTO(customerMapper.entityToDTO(entity.getCustomer()))
+                .build();
     }
 }

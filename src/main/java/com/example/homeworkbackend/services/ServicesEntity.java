@@ -21,7 +21,8 @@ public class ServicesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
+    @Enumerated(EnumType.ORDINAL)
+    private ServicesType type;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate startDate;
@@ -29,9 +30,10 @@ public class ServicesEntity {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate endDate;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable = false)
+    @JoinColumn(name="CUSTOMER_ENTITY_ID")
     private CustomerEntity customer;
 }

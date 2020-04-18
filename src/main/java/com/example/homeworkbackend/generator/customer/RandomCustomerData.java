@@ -9,15 +9,27 @@ import java.util.concurrent.ThreadLocalRandom;
 @Component
 public class RandomCustomerData {
 
+    public CustomerDTO generateCustomerData() {
+        final String name = randomName();
+        CustomerDTO customerDTO = CustomerDTO.builder()
+                .name(name)
+                .cityName(RandomCityName.genarateCity())
+                .phoneNumber(randomPhoneNumber())
+                .emailAddress(randomEmail(name))
+                .netIncome(randomIncome())
+                .build();
+        return customerDTO;
+    }
+
     private static final List<String> NAMES = List.of(
             "Noah", "Liam", "William", "Mason", "James", "Benjamin",
             "Jacob", "Michael", "Elijah", "Ethan", "Alexander", "Oliver",
             "Daniel", "Lucas", "Matthew", "Aiden", "Jackson", "Logan", "David",
             "Joseph", "Samuel", "Henry", "Owen", "Sebastian", "Gabriel", "Carter",
 
-            "Emma","Olivia","Ava","Sophia","Isabella","Mia","Charlotte","Abigail",
-            "Emily","Harper","Amelia","Evelyn","Elizabeth","Sofia","Madison","Avery",
-            "Ella","Scarlett","Grace","Chloe","Victoria","Riley","Aria","Lily","Aubrey","Zoey");
+            "Emma", "Olivia", "Ava", "Sophia", "Isabella", "Mia", "Charlotte", "Abigail",
+            "Emily", "Harper", "Amelia", "Evelyn", "Elizabeth", "Sofia", "Madison", "Avery",
+            "Ella", "Scarlett", "Grace", "Chloe", "Victoria", "Riley", "Aria", "Lily", "Aubrey", "Zoey");
 
 
     private int randomIndexForNames() {
@@ -59,15 +71,4 @@ public class RandomCustomerData {
         return ThreadLocalRandom.current().nextLong(500, 15000);
     }
 
-    public CustomerDTO generateCustomerData() {
-        final String name = randomName();
-        CustomerDTO customerDTO = CustomerDTO.builder()
-                .name(name)
-                .cityName(RandomCityName.genarateCity())
-                .phoneNumber(randomPhoneNumber())
-                .emailAddress(randomEmail(name))
-                .netIncome(randomIncome())
-                .build();
-        return customerDTO;
-    }
 }
