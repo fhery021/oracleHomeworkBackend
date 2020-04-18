@@ -1,6 +1,7 @@
 package com.example.homeworkbackend.customer;
 
 import com.example.homeworkbackend.services.ServicesEntity;
+import com.example.homeworkbackend.sites.SiteEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,5 +33,8 @@ public class CustomerEntity {
 
     @OneToMany
     private List<ServicesEntity> services;
+
+    @OneToMany
+    private List<SiteEntity> sites;
 
 }

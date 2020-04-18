@@ -29,7 +29,7 @@ public class ServicesServiceImpl implements ServicesService {
     }
 
     @Override
-    public List<ServicesDTO> geServicesByCustomerId(Long customerId) {
+    public List<ServicesDTO> getServicesByCustomerId(Long customerId) {
         // TODO replace with findByCustomerID in repository...
         List<ServicesDTO> servicesDTOS = servicesRepository.findAll()
                 .stream()

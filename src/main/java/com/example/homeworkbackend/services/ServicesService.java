@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ServicesService {
 
-    List<ServicesDTO> geServicesByCustomerId(Long customerId);
+    List<ServicesDTO> getServicesByCustomerId(Long customerId);
 
     ServicesDTO applyCustomer(Long customerId, Long serviceId);
 

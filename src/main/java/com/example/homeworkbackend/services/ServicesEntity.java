@@ -34,6 +34,7 @@ public class ServicesEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name="CUSTOMER_ENTITY_ID")
+//    @JoinColumn(name="CUSTOMER_ENTITY_ID")
+    @JoinColumn
     private CustomerEntity customer;
 }
