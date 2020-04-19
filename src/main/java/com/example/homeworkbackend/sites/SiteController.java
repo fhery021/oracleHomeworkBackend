@@ -36,7 +36,7 @@ public class SiteController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<SiteDTO>> getAllServices() {
+    public ResponseEntity<List<SiteDTO>> findAll() {
         return ResponseEntity.ok(siteService.findAll());
     }
 
