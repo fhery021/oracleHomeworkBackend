@@ -67,19 +67,23 @@ public class Bootstrap implements CommandLineRunner {
 
     private void buildServices() {
         if (servicesRepository.findAll().isEmpty()) {
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 30; i++) {
                 servicesService.createService((long) i, randomServicesData.generateServicesData());
             }
             servicesService.createService((long) 1, randomServicesData.generateServicesData());
+            servicesService.createService((long) 1, randomServicesData.generateServicesData());
+            servicesService.createService((long) 2, randomServicesData.generateServicesData());
         }
     }
 
     private void buildSites() {
         if (siteRepository.findAll().isEmpty()) {
-            for (int i = 1; i <= 10; i++) {
+            for (int i = 1; i <= 30; i++) {
                 siteService.createSite((long) i, randomSiteData.generateSiteData());
             }
             siteService.createSite((long) 1, randomSiteData.generateSiteData());
+            siteService.createSite((long) 1, randomSiteData.generateSiteData());
+            siteService.createSite((long) 2, randomSiteData.generateSiteData());
         }
     }
 }
